@@ -1,0 +1,7 @@
+# OS Junk
+.DS_Store
+
+# App Junk
+.bundle
+tmp
+log
