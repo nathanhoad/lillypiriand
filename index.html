@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+
+<head>
+  <meta charset="utf-8">
+  <title>Lilly and Nathan</title>
+  <meta property="og:title" content="Lilly and Nathan">
+  <meta name="description" content="A counter for how long we've been together">
+  <meta property="og:description" content="A counter for how long we've been together">
+  <meta property="og:image" content="https://lillypiriand.nathanhoad.net/share.jpg">
+  <meta property="og:url" content="https://lillypiriand.nathanhoad.net">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=5,viewport-fit=cover">
+  <link type="image/png" href="./favicon.png" rel="icon">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #70c08d;
+      font-family: 'Goudy Bookletter 1911', serif;
+    }
+
+    main {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      text-align: center;
+    }
+
+    section {
+      background: #fbc870;
+      display: inline-block;
+      padding: 0.7rem 4rem;
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translate(-50%, 0);
+      border: 1px solid #f4a857;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    section::before {
+      content: "";
+      background: rgba(251,200,112,1);
+      background: linear-gradient(90deg, rgba(251,200,112,1) 0%, rgba(244,168,87,1) 100%); 
+      border-right: 1px solid #e88a36;
+      position: absolute;
+      top: 10%;
+      left: calc(-3rem - 2px);
+      width: 3rem;
+      height: 100%;
+      box-shadow: 0 5px 10px rgba(232,138,54,0.2);
+    }
+
+    section::after {
+      content: "";
+      background: rgba(251,200,112,1);
+      background: linear-gradient(90deg, rgba(244,168,87,1) 0%, rgba(251,200,112,1) 100%); 
+      border-left: 1px solid #e88a36;
+      position: absolute;
+      top: 10%;
+      right: calc(-3rem - 2px);
+      width: 3rem;
+      height: 100%;
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    img {
+      max-width: 100vw;
+    }
+
+    h1 {
+      margin: 0 0 0.1rem 0;
+      padding: 0;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      white-space: nowrap;
+      font-size: 1.4rem;
+    }
+
+    @media screen and (max-width: 440px) {
+      h1 {
+        font-size: 1.2rem;
+      }
+
+      p {
+        white-space: initial;
+        font-size: 1rem;
+      }
+
+      section {
+        max-width: 90%;
+        padding: 0.2rem 1.4rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <img src="./nathan-and-lilly.gif" alt="">
+    <section>
+      <h1>
+        Lilly &amp; Nathan
+      </h1>
+      <p>
+        Happily together for <span data-date="2015-10-23 08:30:00"></span>
+      </p>
+    </section>
+  </main>
+
+  <script>
+    function p(word, count) {
+      return count + " " + word + (count == 1 ? "" : "s");
+    }
+
+    function getTimeSinceInWords(date) {
+      var seconds = Math.abs(Math.floor((new Date().getTime() - date.getTime()) / 1000));
+
+      var HOURS = 60 * 60;
+      var DAYS = 24 * HOURS;
+      var YEARS = 365 * DAYS;
+      var MONTHS = YEARS / 12;
+
+      var years = Math.floor(seconds / YEARS);
+      seconds -= years * YEARS;
+
+      var months = Math.floor(seconds / MONTHS);
+      seconds -= months * MONTHS;
+
+      var days = Math.floor(seconds / DAYS);
+      seconds -= days * DAYS;
+
+      var since = [];
+      if (years > 0) {
+        since.push(p("year", years));
+      }
+      if (months > 0) {
+        since.push(p("month", months));
+      }
+      if (days > 0) {
+        since.push(p("day", days));
+      }
+
+      return since[0] + (since.length < 2 ? "" : " and " + since[1]);
+    }
+
+    window.addEventListener("DOMContentLoaded", function () {
+      var element = document.querySelector("*[data-date]");
+
+      var date = new Date();
+
+      var t = element.getAttribute("data-date").split(/[:\- ]/);
+      var time = new Date("Sun Jan 01 00:00:00 UTC 2012");
+      time.setUTCFullYear(t[0]);
+      time.setUTCMonth(t[1] - 1);
+      time.setUTCDate(t[2]);
+      time.setUTCHours(t[3]);
+      time.setUTCMinutes(t[4]);
+      time.setUTCSeconds(t[5]);
+
+      element.innerHTML = getTimeSinceInWords(time);
+    });
+  </script>
+</body>
+
+</html>
