@@ -154,10 +154,8 @@
 
     window.addEventListener("DOMContentLoaded", function () {
       var element = document.querySelector("*[data-date]");
-
-      var date = new Date();
-
       var t = element.getAttribute("data-date").split(/[:\- ]/);
+
       var time = new Date("Sun Jan 01 00:00:00 UTC 2012");
       time.setUTCFullYear(t[0]);
       time.setUTCMonth(t[1] - 1);
@@ -165,7 +163,7 @@
       time.setUTCHours(t[3]);
       time.setUTCMinutes(t[4]);
       time.setUTCSeconds(t[5]);
-
+      
       element.innerHTML = getTimeSinceInWords(time);
     });
   </script>
